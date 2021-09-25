@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     colors: {
       FormBlue: "#63B4FC",
+      FormRed: " #FFBDBD",
     },
 
     fontSize: {
@@ -15,19 +16,17 @@ module.exports = {
     extend: {
       width: {
         360: "360px",
+        152: "152px",
       },
       height: {
         FH: "640px",
       },
 
       fontFamily: {
-        'sans': ['Roboto', 'Helvetica', 'Arial', 'sans-serif']
-      }
-    },
+        sans: ["Aileron", "Roboto", "Helvetica", "Arial", "sans-serif"],
+      },
     },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+
+  plugins: [require("@tailwindcss/forms")],
 };
