@@ -2,18 +2,19 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    colors: {
-      FormBlue: "#63B4FC",
-      FormRed: " #FFBDBD",
-    },
-
-    fontSize: {
-      18: "18px",
-      14: "14px",
-      12: "12px",
-    },
-
     extend: {
+      fontSize: {
+        18: "18px",
+        14: "14px",
+        12: "12px",
+      },
+
+      colors: {
+        FormBlue: "#63B4FC",
+        FormRed: " #FFBDBD",
+        FormGrey: "#A1A1A1",
+      },
+
       width: {
         360: "360px",
         152: "152px",
