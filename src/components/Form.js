@@ -105,7 +105,7 @@ const Form = () => {
   // console.log(formik.validationSchema);
 
   return (
-    <div className=" sm:w-auto md:w-360 h-screen m-auto flex flex-col justify-center">
+    <div className="sm:w-auto  md:w-360     h-screen m-auto flex flex-col justify-center">
       <div className=" flex flex-col    ">
         <div className="flex justify-center mb-14">
           <img src={Logo} alt="logo" />
