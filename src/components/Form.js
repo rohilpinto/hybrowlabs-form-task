@@ -18,8 +18,8 @@ const options = [
 ];
 
 const Schema = Yup.object({
-  name: Yup.string().required("Enter name"),
-  designation: Yup.string().required("Enter valid number"),
+  name: Yup.string().min(4).required("Enter name"),
+  designation: Yup.string().min(4).required("Enter valid number"),
   language: Yup.string().required("Language Required"),
 });
 
@@ -83,7 +83,7 @@ const Form = () => {
 
       borderRadius: "99px",
       padding: "5px 10px",
-      border: formik.touched.language || formik.errors.language ? "1px solid #FFBDBD" : "1px solid #63B4FC",
+      border: formik.touched.language && formik.errors.language ? "1px solid #FFBDBD" : "1px solid #63B4FC",
       fontWeight: "400",
       fontSize: "14px",
 
