@@ -9,6 +9,10 @@ module.exports = {
         12: "12px",
       },
 
+      boxShadow: {
+        FormBtnShadow: "0px 14px rgba(0, 0, 0, 0.1)",
+      },
+
       colors: {
         FormBlue: "#63B4FC",
         FormRed: " #FFBDBD",

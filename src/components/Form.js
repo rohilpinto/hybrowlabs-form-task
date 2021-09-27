@@ -6,6 +6,9 @@ import asterisk from "../assets/asterisk-icon.svg";
 import error from "../assets/error-icon.svg";
 import rightArrow from "../assets/right-arrow.svg";
 import logoSmall from "../assets/logo-small.svg";
+import * as Yup from "yup";
+
+import { useHistory } from "react-router";
 
 const options = [
   { value: "English", label: "English" },
@@ -14,74 +17,110 @@ const options = [
   { value: "Bengali", label: "Bengali" },
 ];
 
-// react-select styling
-
-const customStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    borderBottom: "0.5px solid #A1A1A1;",
-    color: state.isSelected ? "#63B4FC" : "#A1A1A1",
-    // padding: 12,
-    // borderRadius: "99px",
-    // padding: "5px 25px",
-  }),
-
-  menu: (provided, state) => ({
-    ...provided,
-
-    borderRadius: "22px",
-
-    padding: "5px 25px",
-  }),
-
-  DropdownIndicator: () => null,
-  indicatorSeparator: () => null,
-
-  control: (provided, state) => ({
-    ...provided,
-
-    borderRadius: "99px",
-    padding: "5px 10px",
-    border: "1px solid #63B4FC",
-    fontWeight: "400",
-    fontSize: "14px",
-  }),
-  singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = "opacity 300ms";
-
-    return { ...provided, opacity, transition };
-  },
-};
+const Schema = Yup.object({
+  name: Yup.string().required("Enter name"),
+  designation: Yup.string().required("Enter valid number"),
+  language: Yup.string().required("Language Required"),
+});
 
 const Form = () => {
+  const history = useHistory();
+
   const formik = useFormik({
     initialValues: {
       name: "",
       designation: "",
-      language: "Marathi",
+      language: "",
     },
+
+    validationSchema: Schema,
 
     onSubmit: (values) => {
-      console.log("submited values", values);
+      history.push({
+        pathname: "/results",
+        state: values,
+      });
     },
 
-    validate: (values) => {
-      let errors = {};
+    // validate: (values) => {
+    //   let errors = {};
 
-      if (!values.name) {
-        errors.name = "Enter name";
-      }
+    //   if (!values.name) {
+    //     errors.name = "Enter name";
+    //   }
 
-      if (!values.designation) {
-        errors.designation = "Enter valid number";
-      }
+    //   if (!values.designation) {
+    //     errors.designation = "Enter valid number";
+    //   }
 
-      return errors;
-    },
+    //   if (!values.language) {
+    //     errors.language = "Language Required";
+    //   }
+
+    //   return errors;
+    // },
   });
 
-  console.log(formik.touched);
+  // react-select styling
+
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      borderBottom: "0.5px solid #A1A1A1;",
+      color: state.isSelected ? "#63B4FC" : "#A1A1A1",
+
+      // padding: 12,
+      // borderRadius: "99px",
+      // padding: "5px 25px",
+    }),
+
+    menu: (provided, state) => ({
+      ...provided,
+
+      borderRadius: "22px",
+
+      padding: "5px 25px",
+    }),
+
+    placeholder: (defaultStyles) => {
+      return {
+        ...defaultStyles,
+        color: formik.errors.language ? "#FFBDBD" : "#A1A1A1",
+      };
+    },
+    dropdownIndicator: (base, state) => ({
+      ...base,
+      transition: "all .2s ease",
+      transform: state.selectProps.menuIsOpen ? "rotate(180deg)" : null,
+    }),
+
+    indicatorSeparator: () => null,
+
+    control: (provided, state) => ({
+      ...provided,
+
+      borderRadius: "99px",
+      padding: "5px 10px",
+      border: formik.touched.language || formik.errors.language ? "1px solid #FFBDBD" : "1px solid #63B4FC",
+      fontWeight: "400",
+      fontSize: "14px",
+
+      placeholder: (defaultStyles) => {
+        return {
+          ...defaultStyles,
+          color: "#ffffff",
+        };
+      },
+    }),
+    singleValue: (provided, state) => {
+      const opacity = state.isDisabled ? 0.5 : 1;
+      const transition = "opacity 300ms";
+      const color = "#63B4FC";
+      return { ...provided, opacity, transition, color };
+    },
+  };
+
+  // console.log(formik.validationSchema);
 
   return (
     <div className="w-360 h-screen m-auto flex flex-col justify-center">
@@ -91,7 +130,7 @@ const Form = () => {
         </div>
 
         <form className="flex flex-col justify-center align-center text-left " onSubmit={formik.handleSubmit}>
-          <label htmlFor="name" className="text-18 text-FormBlue font-bold   ml-3      ">
+          <label htmlFor="name" className="text-18 text-FormBlue font-bold  mb-2 ml-3      ">
             Name
             <span className="inline-block align-text-top pt-1 pl-0">
               <img src={asterisk} alt="asterisk" />
@@ -105,9 +144,22 @@ const Form = () => {
               <p className="ml-1 text-12 text-FormRed">{formik.errors.name}</p>
             </div>
           ) : null}
-          <input type="text" id="name" name="name" placeholder="Enter full name" className="text-14 font-normal text-FormBlue border border-FormBlue rounded-full text-grey py-3 px-5" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter full name"
+            className={`
+            
+            text-14 font-normal ${formik.touched.name && formik.errors.name ? "text-FormRed border-FormRed placeholder-FormRed" : "text-FormBlue border-FormBlue "} border  rounded-full  py-3 px-5
+            
+            `}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
+          />
 
-          <label htmlFor="designation" className="text-18 text-FormBlue font-bold mt-6   ml-3">
+          <label htmlFor="designation" className="text-18 text-FormBlue font-bold mt-6 mb-2  ml-3">
             Designation
             <span className="inline-block align-text-top pt-1 pl-0">
               <img src={asterisk} alt="asterisk" />
@@ -121,15 +173,24 @@ const Form = () => {
               <p className="ml-1 text-12 text-FormRed">{formik.errors.designation}</p>
             </div>
           ) : null}
-          <input type="text" id="language" name="designation" placeholder="Enter Position" className="text-14 font-normal text-FormBlue border border-FormBlue rounded-full text-grey py-3 px-5" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.designation} />
+          <input
+            type="text"
+            id="designation"
+            name="designation"
+            placeholder="Enter Position"
+            className={`text-14 font-normal ${formik.touched.designation && formik.errors.designation ? "text-FormRed border-FormRed placeholder-FormRed" : "text-FormBlue border-FormBlue "}   border   rounded-full text-grey py-3 px-5`}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.designation}
+          />
 
-          <label htmlFor="language" className="text-18 text-FormBlue font-bold mt-6 mb-3 ml-3">
+          <label htmlFor="language" className="text-18 text-FormBlue font-bold mt-6 mb-2 ml-3">
             Language
           </label>
 
-          <Select options={options} styles={customStyles} placeholder={options[0].value} isSearchable={false} name="language" onChange={formik.handleChange} value={formik.values.language} />
+          <Select options={options} styles={customStyles} placeholder="Choose a language" isSearchable={false} onChange={(e) => formik.setFieldValue("language", e.value)} value={formik.values.language.value} onBlur={formik.handleBlur} />
 
-          <button type="submit" className="text-18 text-white font-bold bg-FormBlue w-152 m-auto mt-8 p-2 rounded-full">
+          <button type="submit" className="text-18 text-white font-bold bg-FormBlue w-152 m-auto mt-8 p-2 rounded-full  shadow-md">
             <span className="flex justify-center items-center">
               Login
               <img src={rightArrow} alt="rightArrow" className="ml-2" />
