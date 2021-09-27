@@ -14,7 +14,9 @@ const Results = () => {
   return (
     <div>
       <div>
-        <button onClick={handleClick}>Back</button>
+        <button className="m-5 p-2 border-2   border-purple-500 w-20 hover:bg-purple-500 hover:border-white hover:text-white font-bold rounded" onClick={handleClick}>
+          Back
+        </button>
       </div>
       <div className="flex flex-col m-auto text-18 bg-purple-800 items-center h-screen justify-center">
         <div className="bg-purple-400 rounded p-5">

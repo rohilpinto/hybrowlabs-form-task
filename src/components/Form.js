@@ -105,8 +105,8 @@ const Form = () => {
   // console.log(formik.validationSchema);
 
   return (
-    <div className="w-360 h-screen m-auto flex flex-col justify-center">
-      <div className=" flex flex-col  ">
+    <div className=" sm:w-auto md:w-360 h-screen m-auto flex flex-col justify-center">
+      <div className=" flex flex-col    ">
         <div className="flex justify-center mb-14">
           <img src={Logo} alt="logo" />
         </div>
@@ -134,7 +134,7 @@ const Form = () => {
             className={`
             
             text-14 font-normal ${formik.touched.name && formik.errors.name ? "text-FormRed border-FormRed placeholder-FormRed" : "text-FormBlue border-FormBlue "} border  rounded-full  py-3 px-5
-            
+            placeholder-FormGrey
             `}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -149,7 +149,7 @@ const Form = () => {
           </label>
           {/* error state */}
           {formik.touched.designation && formik.errors.designation ? (
-            <div className="text-right pr-3 flex justify-end items-center  mb-1">
+            <div className=" text-right pr-3 flex justify-end items-center  mb-1">
               <img src={error} alt="error" className="self-center" />
 
               <p className="ml-1 text-12 text-FormRed">{formik.errors.designation}</p>
@@ -160,7 +160,7 @@ const Form = () => {
             id="designation"
             name="designation"
             placeholder="Enter Position"
-            className={`text-14 font-normal ${formik.touched.designation && formik.errors.designation ? "text-FormRed border-FormRed placeholder-FormRed" : "text-FormBlue border-FormBlue "}   border   rounded-full text-grey py-3 px-5`}
+            className={`text-14 font-normal ${formik.touched.designation && formik.errors.designation ? "text-FormRed border-FormRed placeholder-FormRed" : "text-FormBlue border-FormBlue "}   border  rounded-full text-grey py-3 px-5  placeholder-FormGrey`}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.designation}
