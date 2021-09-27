@@ -41,24 +41,6 @@ const Form = () => {
         state: values,
       });
     },
-
-    // validate: (values) => {
-    //   let errors = {};
-
-    //   if (!values.name) {
-    //     errors.name = "Enter name";
-    //   }
-
-    //   if (!values.designation) {
-    //     errors.designation = "Enter valid number";
-    //   }
-
-    //   if (!values.language) {
-    //     errors.language = "Language Required";
-    //   }
-
-    //   return errors;
-    // },
   });
 
   // react-select styling

@@ -1,5 +1,6 @@
 module.exports = {
-  purge: [],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  safelist: ["text-FormRed", "placeholder-FormRed", "text-FormBlue ", "border-FormBlue", "border-FormRed", "text-FormBlue ", "border-FormBlue"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
