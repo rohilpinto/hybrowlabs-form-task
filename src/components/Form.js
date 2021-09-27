@@ -67,7 +67,7 @@ const Form = () => {
     placeholder: (defaultStyles) => {
       return {
         ...defaultStyles,
-        color: formik.errors.language ? "#FFBDBD" : "#A1A1A1",
+        color: formik.touched.language && formik.errors.language ? "#FFBDBD" : "#A1A1A1",
       };
     },
     dropdownIndicator: (base, state) => ({
@@ -114,7 +114,7 @@ const Form = () => {
         <form className="flex flex-col justify-center align-center text-left " onSubmit={formik.handleSubmit}>
           <label htmlFor="name" className="text-18 text-FormBlue font-bold  mb-2 ml-3      ">
             Name
-            <span className="inline-block align-text-top pt-1 pl-0">
+            <span className="inline-block align-text-top pt-1 pl-1">
               <img src={asterisk} alt="asterisk" />
             </span>
           </label>
@@ -143,7 +143,7 @@ const Form = () => {
 
           <label htmlFor="designation" className="text-18 text-FormBlue font-bold mt-6 mb-2  ml-3">
             Designation
-            <span className="inline-block align-text-top pt-1 pl-0">
+            <span className="inline-block align-text-top pt-1 pl-1">
               <img src={asterisk} alt="asterisk" />
             </span>
           </label>
